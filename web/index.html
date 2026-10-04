@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hand Gesture Control</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Touchless Interaction</p>
+          <h1>Hand Gesture Control</h1>
+        </div>
+        <button id="startCameraBtn" class="primary-btn">Start Camera</button>
+      </header>
+
+      <main class="layout">
+        <section class="panel camera-panel">
+          <div class="panel-header">
+            <h2>Webcam Preview</h2>
+            <span id="statusBadge" class="status-badge inactive">INACTIVE</span>
+          </div>
+
+          <div class="video-shell">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="landmarksCanvas" width="640" height="480"></canvas>
+            <div id="cursor" class="cursor"></div>
+          </div>
+
+          <div class="camera-readings" aria-live="polite">
+            <span id="cameraReadout">Camera: not started</span>
+            <span id="trackingReadout">Hand: not detected</span>
+            <span id="landmarkReadout">Landmarks: --</span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="metric">
+              <span class="label">Gesture</span>
+              <strong id="gestureName">NONE</strong>
+            </div>
+            <div class="metric">
+              <span class="label">Confidence</span>
+              <strong id="gestureConfidence">0.00</strong>
+            </div>
+            <div class="metric">
+              <span class="label">Volume</span>
+              <strong id="volumeValue">55%</strong>
+            </div>
+            <div class="metric">
+              <span class="label">Slide</span>
+              <strong id="slideValue">03 / 10</strong>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel controls-panel">
+          <div class="section-block">
+            <h3>Gesture Instructions</h3>
+            <ul>
+              <li>Open palm for 1.5s to activate</li>
+              <li>Thumbs up: volume up</li>
+              <li>Thumbs down: volume down</li>
+              <li>Index movement: move cursor</li>
+              <li>Raise or lower your hand: show vertical movement reading</li>
+              <li>Pinch: click</li>
+              <li>Two fingers: next slide</li>
+              <li>One finger: previous slide</li>
+            </ul>
+          </div>
+
+          <div class="section-block">
+            <h3>Activation</h3>
+            <div class="activation-block">
+              <div class="activation-indicator" id="activationIndicator"></div>
+              <span id="activationText">Waiting for open palm</span>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <h3>Presentation</h3>
+            <div class="slide-card">
+              <span class="mini-label">Current</span>
+              <strong id="slideDisplay">Slide 03</strong>
+            </div>
+          </div>
+
+          <div class="section-block">
+            <h3>Browser Limitation</h3>
+            <p class="note">
+              Browser security prevents normal webpages from controlling the actual operating-system mouse,
+              keyboard, system volume, or PowerPoint application. This demo simulates those actions locally.
+            </p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
